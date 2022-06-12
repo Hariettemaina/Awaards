@@ -11,16 +11,13 @@
     {% else %}
       <title>Awwards </title>
     {% endif %}
-    
-    {% block styles %}
-      {% bootstrap_css %}
       <link rel="stylesheet" href="{% static 'css/index.css' %}">
       <link href="https://fonts.googleapis.com/css2?family=Teko&display=swap" rel="stylesheet">
       <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Teko&display=swap" rel="stylesheet">
       <link href="https://fonts.googleapis.com/css2?family=Calistoga&family=Shrikhand&display=swap" rel="stylesheet">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
       
-    {% endblock %}
+   
     <title>Awwards</title>
   </head>
   <body>
@@ -29,7 +26,7 @@
     {% block scripts %}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         
-     {% bootstrap_javascript %}
+     
     {% endblock %}
     {% include 'footer.html' %} 
   </body>
