@@ -1,4 +1,4 @@
-
+{% load bootstrap4 %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -7,18 +7,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     {% if title %}
-    <title>Awwards - {{title}}</title>
+    <title>TheeAwwards - {{title}}</title>
     {% else %}
-      <title>Awwards </title>
+      <title>TheeAwwards </title>
     {% endif %}
-      <link rel="stylesheet" href="{% static 'css/index.css' %}">
+     
       <link href="https://fonts.googleapis.com/css2?family=Teko&display=swap" rel="stylesheet">
       <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Teko&display=swap" rel="stylesheet">
       <link href="https://fonts.googleapis.com/css2?family=Calistoga&family=Shrikhand&display=swap" rel="stylesheet">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-      
+      <link rel="stylesheet" href="{% static 'css/index.css' %}"> 
    
-    <title>Awwards</title>
+    <title>TheeAwwards</title>
   </head>
   <body>
     {% include 'navbar.html' %} 
