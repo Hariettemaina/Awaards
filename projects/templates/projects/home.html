@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block content %}
+{{block.super}}
+    <div style="padding:30px">
+        <p class=" text-center text-muted" style="font-weight: bold;">The awards of design, creativity and innovation on the internet </p>
+  
+    </div>
+    <div class="hero-image" >
+        <div class="hero-text">
+            <h1 style="font-family: 'Calistoga', cursive;color:white;">Magnum Awwards</h1><br>
+            <p >Web Design Rating and Review</p><hr>
+            <h4 style="font-weight: bold;color:white;"> Design - Usability - Content</h4><br>
+            <form class="navbar-form" role="search" action="{% url 'search_project' %}">
+                <div class="input-group ">
+                    <input input type="text" class="form-control" placeholder="Search Project" name="project" >
+                    <div class="input-group-btn">
+                        <button class="btn btn-info" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                    </div>
+                </div>
+            </form>
+ 
+            
+        </div>
+    </div>
+    </div class="container" >
+        
+        <div class="text-center container" style="padding:30px">
+            <h4 style="font-weight: bold;"> Allow our panel of users to review your site today!</h4><br>
+            <a class="btn btn-lg btn-success" style="border-radius: 25px;" href="{% url 'new_project' %}">Submit Your Site!</a><br> 
+        </div><hr>
+        <div class="container">
+            <h5 class="text-uppercase font-weight-bold"><strong> Nominees</strong> We need your vote!</h5>
+        </div>
+        
+        <div class="container">
+            <h3 style="color:#535250;text-align:center;"><strong>Submitted </strong> Sites </h3><br><br>
+            {% for project in projects %}
+            <div class="col-lg-4 col-lg-4 col-lg-4">
+                <div class="card ">
+                    <img src="{{project.webimage.url}}"  class="card-img-top img-fluid" alt="{{project.name}}" >
+                    <div class="card-text text-center" style="padding: 20px;">
+                        <h4 style="font-weight: bold;">{{project.name}}</h4>
+                        <small class="text-muted" style="font-family: Arial, Helvetica, sans-serif;">{{project.description | slice:":100" }}...</small><br><br>
+                        <a class="btn btn-info" style="border-radius: 25px;" href="/awwards/project/{{project.id}}" >Project details & Rating</a><br><br>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div><br><br>
+        
+    </div>
+
+
+{%endblock%}
