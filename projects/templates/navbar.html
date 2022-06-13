@@ -1,18 +1,8 @@
-
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
       <a class="navbar-brand " href="/"><span style="font-family: 'Calistoga', cursive;font-size:30px;color:#535250;">Awwards</a>
       <a class="navbar-brand"  href="/"><span style="padding-right: 5px;font-weight: bold;margin-left:10px;color:#535250;">Home</span></a>
-      <a class="navbar-brand"  href="/awwardsapi"><span style="font-weight: bolder;color:#f26419;">API</span></a>
-     
+      <a class="navbar-brand"  href="/projectsapi"><span style="font-weight: bolder;color:#f26419;">API</span></a>
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1">
@@ -24,8 +14,8 @@
         <div class='navbar-right'style="padding: 20px;">
           <span style="font-weight: bold;">
           <div class="" role="menu">
-            <a href="/awwards/profile/{{user.id}}" style="color: #0081a7;"><img src="{{request.user.profile.profile_pic.url}}" alt="" width="40px" height="40px" style="border-radius: 50%;"></a>
-            <small style="padding-right: 10px;">Welcome  <a href="/awwards/profile/{{user.id}}" style="color: #0081a7;">{{user.username}}</a></small>
+            <a href="/projects/profile/{{user.id}}" style="color: #0081a7;"><img src="{{request.user.profile.profile_pic.url}}" alt="" width="40px" height="40px" style="border-radius: 50%;"></a>
+            <small style="padding-right: 10px;">Welcome  <a href="//profile/{{user.id}}" style="color: #0081a7;">{{user.username}}</a></small>
 
             
             
