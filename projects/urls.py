@@ -2,6 +2,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
 from . import views
+from django.contrib.auth import views as auth_views
 
 
 urlpatterns=[
@@ -13,7 +14,7 @@ urlpatterns=[
     path('projectsapi/api/profile/', views.ProfileList.as_view(),name='api-profile'),
     path('projectsapi/api/project/', views.ProjectList.as_view(),name='api-project'),
     path('projectsapi/',views.api_page,name='api-page'),
-    path('accounts/',views.register, name='register'),
+    path('register/',views.register, name='register'),
     
 ]
 if settings.DEBUG:

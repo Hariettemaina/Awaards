@@ -16,17 +16,33 @@ from rest_framework.views import APIView
 from .serializer import ProfileSerializer,ProjectSerializer
 
 # Create your views here.
-def register_request(request):
-	if request.method == "POST":
-		form = RegisterForm(request.POST)
-		if form.is_valid():
-			user = form.save()
-			login(request, user)
-			messages.success(request, "Registration successful." )
-			return redirect('home')
-		messages.error(request, "Unsuccessful registration. Invalid information.")
-	form = RegisterForm()
-	return render (request=request, template_name="projects/register.html", context={"register_form":form})
+def register(request):
+    if request.method == "POST":
+        username=request.POST['username']
+        email=request.POST['email']
+        password1=request.POST['password1']
+        password2=request.POST['password2']
+        user = User.objects.create_user(username=username,email=email,password=password1)
+        user.save()
+        profile=Profile.objects.create(user=user,email=user.email)
+        
+        # form = RegisterForm(request.POST, request.FILES)
+        # if form.is_valid():
+        #     form.save()
+        #     username = form.cleaned_data.get('username')
+        #     raw_password = form.cleaned_data.get('password1')
+        #     user = authenticate(username=username, password=raw_password)
+        #     login(request, user)
+        #     user.save()
+        # 	login(request, user)
+        # 	messages.success(request, "Registration successful." )
+        # 	return redirect('home')
+        # messages.error(request, "Unsuccessful registration. Invalid information.")
+        return redirect('login')
+    else:
+        form = RegisterForm()
+
+    return render (request,"registration/registration_form.html", context={"form":form})
 
 def home(request):
     projects=Project.objects.all()
@@ -55,19 +71,19 @@ def view_profile(request):
     return render(request,"projects/profile.html",context=context)
 
 
-def register(request):
-    if request.method == 'POST':
-        username=request.POST['username']
-        email=request.POST['email']
-        password1=request.POST['password1']
-        password2=request.POST['password2']
-        user = User.objects.create_user(username=username,email=email,password=password1)
-        user.save()
-        Profile=Profile.objects.create(user=user,email=user.email)
+# def register(request):
+#     if request.method == 'POST':
+#         username=request.POST['username']
+#         email=request.POST['email']
+#         password1=request.POST['password1']
+#         password2=request.POST['password2']
+#         user = User.objects.create_user(username=username,email=email,password=password1)
+#         user.save()
+#         Profile=Profile.objects.create(user=user,email=user.email)
         
-        return redirect('login')
-    else:
-        return render(request,'registration/registration_form.html')
+#         return redirect('login')
+#     else:
+#         return render(request,'registration/registration_form.html')
 
 
 
