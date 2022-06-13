@@ -1,20 +1,33 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login
 from .models import Profile,Project
-from .forms import NewProjectForm,ProfileUpdateForm
+from .forms import NewProjectForm,ProfileUpdateForm,RegisterForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from rest_framework import status
 from rest_framework.response import Response
 from django.contrib import auth
+from django.contrib import messages
 
 from rest_framework.views import APIView
 from .serializer import ProfileSerializer,ProjectSerializer
 
 # Create your views here.
+def register_request(request):
+	if request.method == "POST":
+		form = RegisterForm(request.POST)
+		if form.is_valid():
+			user = form.save()
+			login(request, user)
+			messages.success(request, "Registration successful." )
+			return redirect('home')
+		messages.error(request, "Unsuccessful registration. Invalid information.")
+	form = RegisterForm()
+	return render (request=request, template_name="projects/register.html", context={"register_form":form})
+
 def home(request):
     projects=Project.objects.all()
     return render(request,'projects/home.html',{'projects':projects})
@@ -91,9 +104,6 @@ def new_project(request):
 def api_page(request):
     return render(request,'projects/api_page.html')
 
-def logout(request):
-    auth.logout(request)
-    return render(request,'registration/logout.html')
 
 
 class ProfileList(APIView):

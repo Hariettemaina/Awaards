@@ -9,6 +9,7 @@ psycopg2 = "*"
 pillow = "*"
 django-bootstrap4 = "*"
 djangorestframework = "*"
+django-registration = "*"
 
 [dev-packages]
 

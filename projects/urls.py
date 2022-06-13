@@ -13,7 +13,7 @@ urlpatterns=[
     path('projectsapi/api/profile/', views.ProfileList.as_view(),name='api-profile'),
     path('projectsapi/api/project/', views.ProjectList.as_view(),name='api-project'),
     path('projectsapi/',views.api_page,name='api-page'),
-    path('register/',views.register, name='register'),
+    path('accounts/',views.register, name='register'),
     
 ]
 if settings.DEBUG:
