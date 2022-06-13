@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from rest_framework import status
 from rest_framework.response import Response
+from django.contrib import auth
 
 from rest_framework.views import APIView
 from .serializer import ProfileSerializer,ProjectSerializer
@@ -49,7 +50,7 @@ def register(request):
         password2=request.POST['password2']
         user = User.objects.create_user(username=username,email=email,password=password1)
         user.save()
-        profile=Profile.objects.create(user=user,email=user.email)
+        Profile=Profile.objects.create(user=user,email=user.email)
         
         return redirect('login')
     else:
@@ -89,6 +90,10 @@ def new_project(request):
 @login_required(login_url='/accounts/login/')   
 def api_page(request):
     return render(request,'projects/api_page.html')
+
+def logout(request):
+    auth.logout(request)
+    return render(request,'registration/logout.html')
 
 
 class ProfileList(APIView):
