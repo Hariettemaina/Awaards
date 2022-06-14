@@ -19,14 +19,14 @@
 
             
             
-            <a class="btn btn-info" style="border-radius: 25px;" href="/logout">Logout</a> 
+            <a class="btn btn-info" style="border-radius: 25px;" href="{% url 'logout' %}">Logout</a> 
           </div>
           </span>
             {% else %}
           <span style="font-weight: bold;">
           <div class='navbar-right'style="padding: 20px;">
               <small style="margin-right:10px">Are you a member?</small>
-              <a style="color: #0096c7; margin-right:10px" href="/accounts/login">Login</a>
+              <a style="color: #0096c7; margin-right:10px" href="{% url 'login' %}">Login</a>
 
               <a  class="btn btn-sm btn-info" style="border-radius: 25px;" href="{% url 'register' %}">Sign Up</a>
           </div>

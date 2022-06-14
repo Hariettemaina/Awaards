@@ -2,6 +2,8 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth import login
+
+import projects
 from .models import Profile,Project
 from .forms import NewProjectForm,ProfileUpdateForm,RegisterForm
 from django.contrib.auth.decorators import login_required
@@ -115,6 +117,10 @@ def new_project(request):
     else:
         form = NewProjectForm()
     return render(request, 'projects/new_project.html', {"form":form, "current_user":current_user})
+
+def single_project(request,id):
+    project = Project.objects.get(id=id)
+    return render(request,'projects/project.html', {'project': project})
     
 @login_required(login_url='/accounts/login/')   
 def api_page(request):
