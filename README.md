@@ -56,8 +56,9 @@ A web application where developers can be a able to post their projects and othe
 - Now your ready to run the modules type the fillowing commands to run the app locally. python3.8 manage.py server
 
 ## Setup
--To run this project, use the live link in the GitHub repo: The live link to the project is als provided 
+-To run this project, use the live link in the GitHub repo: The live link to the project is also provided 
 below.
+- theeawards.herokuapp.com/
 
 # Contact
 - hariettemaina@gmail.com
