@@ -1,9 +1,9 @@
+
+from email.mime import image
 from django.shortcuts import render,redirect
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth import login
-
-import projects
 from .models import Profile,Project
 from .forms import NewProjectForm,ProfileUpdateForm,RegisterForm
 from django.contrib.auth.decorators import login_required
@@ -13,38 +13,46 @@ from rest_framework import status
 from rest_framework.response import Response
 from django.contrib import auth
 from django.contrib import messages
-
 from rest_framework.views import APIView
 from .serializer import ProfileSerializer,ProjectSerializer
 
 # Create your views here.
-def register(request):
-    if request.method == "POST":
-        username=request.POST['username']
-        email=request.POST['email']
-        password1=request.POST['password1']
-        password2=request.POST['password2']
-        user = User.objects.create_user(username=username,email=email,password=password1)
-        user.save()
-        profile=Profile.objects.create(user=user,email=user.email)
+# def register(request):
+#     if request.method == "POST":
+#         username = request.POST.get('username')
+#         email = request.POST.get('email')
+#         password = request.POST.get('password')
+#         bio = request.POST.get('bio')
+#         image = request.FILES.get('image')
         
-        # form = RegisterForm(request.POST, request.FILES)
-        # if form.is_valid():
-        #     form.save()
-        #     username = form.cleaned_data.get('username')
-        #     raw_password = form.cleaned_data.get('password1')
-        #     user = authenticate(username=username, password=raw_password)
-        #     login(request, user)
-        #     user.save()
-        # 	login(request, user)
-        # 	messages.success(request, "Registration successful." )
-        # 	return redirect('home')
-        # messages.error(request, "Unsuccessful registration. Invalid information.")
-        return redirect('login')
-    else:
-        form = RegisterForm()
+#         user = User.objects.create_user(username=username, email=email, password=password)
+#         profile = Profile.objects.create(user=user, profile_pic=image, bio=bio)
+#         user.save()
+#         profile.save()
+        
+#         if profile:
+#             messages.success(request,'Profile Created Please Login')
+#             return redirect('login')
 
-    return render (request,"registration/registration_form.html", context={"form":form})
+#     return render (request,"registration/registration_form.html", {})
+
+# def loginpage(request):
+#     if request.user.is_authenticated:
+#         return redirect('home')
+#     else:
+#         if request.method == 'POST':
+#             username = request.POST.get('username')
+#             password =request.POST.get('password')
+
+#             user = authenticate(request, username=username, password=password)
+
+#         if user is not None:
+#                 login(request, user)
+#                 return redirect('/')
+#         else:
+#                 messages.info(request, 'Username OR password is incorrect')
+       
+#         return render(request, 'registration/login.html')
 
 def home(request):
     projects=Project.objects.all()
@@ -73,19 +81,19 @@ def view_profile(request):
     return render(request,"projects/profile.html",context=context)
 
 
-# def register(request):
-#     if request.method == 'POST':
-#         username=request.POST['username']
-#         email=request.POST['email']
-#         password1=request.POST['password1']
-#         password2=request.POST['password2']
-#         user = User.objects.create_user(username=username,email=email,password=password1)
-#         user.save()
-#         Profile=Profile.objects.create(user=user,email=user.email)
+def register(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        email = request.POST['email']
+        password1 = request.POST['password1']
+        password2 = request.POST['password2']
+        user = User.objects.create_user(username=username,email=email,password=password1)
+        user.save()
+        profile = Profile.objects.create(user=user,email=user.email,profile_pic = image)
         
-#         return redirect('login')
-#     else:
-#         return render(request,'registration/registration_form.html')
+        return redirect('login')
+    else:
+        return render(request,'registration/registration_form.html')
 
 
 
@@ -118,6 +126,7 @@ def new_project(request):
         form = NewProjectForm()
     return render(request, 'projects/new_project.html', {"form":form, "current_user":current_user})
 
+
 def single_project(request,id):
     project = Project.objects.get(id=id)
     return render(request,'projects/project.html', {'project': project})
@@ -126,7 +135,12 @@ def single_project(request,id):
 def api_page(request):
     return render(request,'projects/api_page.html')
 
+@login_required(login_url="/login")
+def profile(request,id):
+    user = request.user
+    profile = Profile.objects.get( id= id)
 
+    return render(request, 'registration/profile.html', {'profile':profile})
 
 class ProfileList(APIView):
     def get(self, request, fromat=None):

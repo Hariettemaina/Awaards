@@ -16,7 +16,9 @@ urlpatterns=[
     path('projectsapi/',views.api_page,name='api-page'),
     path('register/',views.register, name='register'),
     path('projects/<int:id>',views.single_project,name='project'),
-    path('account/', include('django.contrib.auth.urls'))
+    path('account/', include('django.contrib.auth.urls')),
+    path('profile/<int:id>', views.view_profile,name='profile')
+    #path('account/login', views.register, name='login'),
     
 ]
 if settings.DEBUG:

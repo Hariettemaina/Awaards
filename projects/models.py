@@ -7,7 +7,7 @@ class Profile(models.Model):
     profile_pic= models.ImageField(upload_to='profilepic/',default='default.jpeg')
     user = models.OneToOneField(User,on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=50,blank=True)
-    bio= models.CharField(max_length=500)
+    bio = models.TextField(null=True)
     email=models.EmailField()
 
     def save_profile(self):
