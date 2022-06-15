@@ -89,7 +89,7 @@ def register(request):
         password2 = request.POST['password2']
         user = User.objects.create_user(username=username,email=email,password=password1)
         user.save()
-        profile = Profile.objects.create(user=user,email=user.email,profile_pic = image)
+        profile = Profile.objects.create(user=user,email=user.email)
         
         return redirect('login')
     else:
